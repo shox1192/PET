@@ -19,5 +19,4 @@ The automated tests in this project cover various features of the online shop, i
  • User profile management
 Contributing
 If you find any issues with the test coverage or have any suggestions for improvements, feel free to open an issue or submit a pull request.
-License
-This project is licensed under the MIT License - see the LICENSE (https://chat.openai.com/LICENSE) file for details.
+
