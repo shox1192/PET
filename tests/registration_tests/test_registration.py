@@ -20,9 +20,19 @@ class TestRegistration(BaseTest):
         ).to_have_text("Підтвердження номера телефону Для реєстрації введіть "
                        "код підтвердження із SMS або Viber, надісланого на номер  Телефон  "
                        "Код підтвердження  Підтвердити  Відправити код ще раз  (60) ")
+        expect(self.page).to_have_url(self.url)
 
-    # @pytest.mark.parametrize(
-    #     "form, message",
-    #
-    # )
-    # def test_forms_validation(self, form, message):
+    @pytest.mark.parametrize(
+        "form ,message",
+            [
+        ["name", "Введіть своє ім'я кирилицею"],
+        ["lastname", "Введіть своє прізвище кирилицею"],
+            ]
+    )
+    def test_forms_with_cyrillic_validation(self, form, message):
+        HomePage(self.page).open_registration_popup()
+        RegistrationPage(self.page).fill_invalid_name(form)
+        expect(
+            RegistrationPage(self.page).get_registration_validation_message(form)
+        ).to_have_text(message)
+        expect(self.page).to_have_url(self.url)

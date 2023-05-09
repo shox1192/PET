@@ -1,7 +1,11 @@
-git remote add origin https://github.com/shox1192/qa_automation_PET.git
-git branch -M main
-git push -u origin main
-__(self, page):
+import random
+import string
+import os
+
+from pages.base_page import BasePage
+
+class RegistrationPage(BasePage):
+    def __init__(self, page):
         super().__init__(page)
         self.name_field = "//input[@formcontrolname='name']"
         self.surname_field = "//input[@formcontrolname='surname']"
@@ -10,18 +14,35 @@ __(self, page):
         self.password_field = "//input[@formcontrolname='password']"
         self.submit_registration_btn = ".button--green.auth-modal__submit"
         self.phone_validation_modal = ".auth-modal__form.ng-untouched"
+        self.first_name_field_validation_msg = "(//p[@class='validation-message ng-star-inserted'])[1]"
+        self.last_name_field_validation_msg = "(//form-error[@class='validation-message'])[2]"
 
     def fill_registration_fields_and_submit(self):
         self.page.fill(self.name_field, self.random_cyrillic_string(7))
         self.page.fill(self.surname_field, self.random_cyrillic_string(8))
         self.page.fill(self.phone_number_field, "093" + self.random_valid_phone())
         self.page.fill(self.email_field, self.random_string(7) + "@box.com")
-        self.page.fill(self.password_field, "123Qweasd")
+        self.page.fill(self.password_field, os.getenv("PASSWORD"))
         self.page.locator(self.submit_registration_btn).click(force=True)
+
+    def fill_invalid_name(self, form):
+        if form == "name":
+            locator = self.name_field
+        else:
+            locator = self.surname_field
+        self.page.fill(locator, self.random_string(7))
 
     def get_phone_validation_modal_window(self):
         self.page.locator(self.phone_validation_modal).wait_for(timeout=5000)
         return self.get_locator(self.phone_validation_modal)
+
+    def get_registration_validation_message(self, form):
+        if form == "name":
+            locator = self.first_name_field_validation_msg
+        else:
+            locator = self.last_name_field_validation_msg
+        return self.get_locator(locator)
+
 
     def random_valid_phone(self):
         phone = random.randint(0000000, 9999999)
@@ -42,5 +63,5 @@ __(self, page):
                     "ж", "з", "и", "і", "ї", "й", "к", "л",
                     "м", "н", "о", "п", "р", "с", "т", "у",
                     "ф", "х", "ц", "ч", "ш", "щ", "ь", "ю", "я"]
-        random_string = "".join(random.choice(alphabet) for each in range(amount_of_chars))
+        random_string = "".join(random.choice(alphabet) for _ in range(amount_of_chars))
         return random_string

@@ -2,3 +2,4 @@ ls
 t_key.pub
 /pet_key
 /.pytest_cache
+/pet_key.pub
