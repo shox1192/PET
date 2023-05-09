@@ -4,6 +4,11 @@ import os
 
 from pages.base_page import BasePage
 
+"""
+The class which represents the Registration Page of the website with all the locators, 
+selectors and all necessary functions and methods for this exact page.
+"""
+
 class RegistrationPage(BasePage):
     def __init__(self, page):
         super().__init__(page)
@@ -16,6 +21,13 @@ class RegistrationPage(BasePage):
         self.phone_validation_modal = ".auth-modal__form.ng-untouched"
         self.first_name_field_validation_msg = "(//p[@class='validation-message ng-star-inserted'])[1]"
         self.last_name_field_validation_msg = "(//form-error[@class='validation-message'])[2]"
+        self.wrong_phone_validation_msg = "(//form-error[@class='validation-message'])[3]"
+        self.wrong_email_validation_msg = "(//form-error[@class='validation-message'])[4]"
+        self.registration_modal = ".modal__holder.modal__holder_show_animation"
+        self.password_less_than_6 = "(//p[@class='errors-list__text'])[3]"
+        self.password_no_cyrillic_chars = "(//p[@class='errors-list__text'])[2]"
+        self.password_no_digits = "(//p[@class='errors-list__text'])[4]"
+        self.password_no_upcase = "(//p[@class='errors-list__text'])[5]"
 
     def fill_registration_fields_and_submit(self):
         self.page.fill(self.name_field, self.random_cyrillic_string(7))
@@ -32,6 +44,29 @@ class RegistrationPage(BasePage):
             locator = self.surname_field
         self.page.fill(locator, self.random_string(7))
 
+    def fill_invalid_phone_number(self):
+        self.page.fill(self.phone_number_field, "123")
+
+    def fill_invalid_email(self):
+        self.page.fill(self.email_field, "wrongemail")
+
+    def fill_invalid_password(self, password):
+        self.page.fill(self.password_field, password)
+
+    def pick_the_correct_invalid_password_message_locator(self, password):
+        if password == "1Qwer":
+            locator = self.password_less_than_6
+        elif password == "пароль":
+            locator = self.password_no_cyrillic_chars
+        elif password == "noDigits":
+            locator = self.password_no_digits
+        elif password == "noupcase1":
+            locator = self.password_no_upcase
+        else:
+            locator = ""
+        return self.get_locator(locator)
+
+
     def get_phone_validation_modal_window(self):
         self.page.locator(self.phone_validation_modal).wait_for(timeout=5000)
         return self.get_locator(self.phone_validation_modal)
@@ -43,6 +78,14 @@ class RegistrationPage(BasePage):
             locator = self.last_name_field_validation_msg
         return self.get_locator(locator)
 
+    def get_invalid_phone_validation_message(self):
+        return self.get_locator(self.wrong_phone_validation_msg)
+
+    def get_invalid_email_validation_message(self):
+        return self.get_locator(self.wrong_email_validation_msg)
+
+    def get_registration_modal(self):
+        return self.get_locator(self.registration_modal)
 
     def random_valid_phone(self):
         phone = random.randint(0000000, 9999999)
