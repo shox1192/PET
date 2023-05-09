@@ -1,0 +1,28 @@
+QA Automation Test Coverage of a Popular Ukrainian Online Shop (rozetka.com.ua)
+This project is non-commercial and non-profit and created only for skills demonstration. If you have any issues or questions regarding it - please contact me kocubina@ukr.net .
+This project is a comprehensive test coverage of a popular Ukrainian online shop. It demonstrates the use of Python programming language, pytest, and playwright to create an automated testing framework that can test various features of the online shop.
+Requirements
+ • Python 3.6 or above
+ • Pytest
+ • Playwright
+Installation
+ 1 Clone this repository to your local machine.
+ 2 Install the required dependencies using pip: pip install -r requirements.txt
+Configuration
+The config.ini file contains the necessary configuration details for the automated tests. Update this file with the appropriate values before running the tests. The following configuration options are available:
+ • url: https://rozetka.com.ua/ua/
+Usage
+To run the automated tests, navigate to the root directory of the project and run the command pytest in the terminal. This will execute all the tests in the tests directory.
+To run a specific test file or a specific test case, use the following command: pytest <test_file_path>::<test_case_name>. For example, to run the test_authentication.py test file, use the command pytest tests/test_authentication.py.
+Test Coverage
+The automated tests in this project cover various features of the online shop, including:
+ • User authentication: Tests the login and logout functionality of the online shop.
+ • Product search and filtering: Tests the search and filtering functionality of the online shop.
+ • Adding products to cart: Tests the ability to add products to the cart and update the cart.
+ • Checkout process: Tests the checkout process, including entering shipping and payment information.
+ • User profile management: Tests the ability to edit user profile information.
+Test Structure
+The automated tests are structured using the Page Object Model design pattern. Each page of the online shop is represented by a Python class that contains the methods for interacting with the page. These classes are located in the pages directory.
+The tests are located in the tests directory and are organized by feature. Each test file contains a set of tests that cover a specific feature of the online shop.
+Contributing
+If you find any issues with the test coverage or have any suggestions for improvements, feel free to open an issue or submit a pull request.
