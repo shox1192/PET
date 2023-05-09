@@ -1,6 +1,6 @@
 # PET
 QA Automation Test Coverage of a Popular Ukrainian Online Shop (rozetka.com.ua)
-This is a test coverage of a popular Ukrainian online shop. The aim of this project is to demonstrate my skills and knowledge in the field of QA Automation. I have used Python programming language, pytest, and playwright to create an automated testing framework that can test various features of the online shop.
+This is a test coverage of a popular Ukrainian online shop. This project is non-commercial and non-profit and created only for skills demonstration. If you have any issues or questions regarding it - please contact me kocubina@ukr.net. I have used Python programming language, pytest, and playwright to create an automated testing framework that can test various features of the online shop.
 Requirements
  • Python 3.6 or above
  • Pytest
