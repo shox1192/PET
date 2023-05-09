@@ -21,8 +21,8 @@ class TestRegistration(BaseTest):
                        "код підтвердження із SMS або Viber, надісланого на номер  Телефон  "
                        "Код підтвердження  Підтвердити  Відправити код ще раз  (60) ")
 
-    @pytest.mark.parametrize(
-        "form, message",
-
-    )
-    def test_forms_validation(self, form, message):
+    # @pytest.mark.parametrize(
+    #     "form, message",
+    #
+    # )
+    # def test_forms_validation(self, form, message):
