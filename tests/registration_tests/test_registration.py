@@ -1,8 +1,8 @@
+import pytest
 from tests.base_test import BaseTest
 from playwright.sync_api import expect
 from pages.main_page.page_main import HomePage
 from pages.registration_page.page_registration import RegistrationPage
-import pytest
 
 """
 This class contains the UI tests of the registration flow!
