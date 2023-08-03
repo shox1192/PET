@@ -1,0 +1,11 @@
+version: '3'
+services:
+  test:
+    user: "1001:1001"
+    build: .
+    volumes:
+      - ./allure-results:/allure-results:rw
+      - ./allure-report:/allure-report:rw
+    environment:
+      PYTHONUNBUFFERED: 1
+    network_mode: "host"
